@@ -1,8 +1,6 @@
 CC=arm-none-eabi-gcc
 CFLAGS=-mcpu=cortex-m4 -mthumb -nostdlib
-CPPFLAGS=-DSTM32F401xE \
-				 -Ivendor/CMSIS/Device/ST/STM32F4/Include \
-				 -Ivendor/CMSIS/CMSIS/Core/Include
+CPPFLAGS=-DSTM32F401xE 
 
 LINKER_FILE=linker_script.ld
 LDFLAGS=-T $(LINKER_FILE) \
@@ -20,9 +18,6 @@ main.o: main.c
 
 startup.o: startup.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) startup.c -c
-
-system_stm32f4xx.o: vendor/CMSIS/Device/ST/STM32F4/Source/Templates/system_stm32f4xx.c
-	$(CC) $(CFLAGS) $(CPPFLAGS) vendor/CMSIS/Device/ST/STM32F4/Source/Templates/system_stm32f4xx.c -c
 
 PROGRAMMER=openocd
 PROGRAMMER_FLAGS=-f interface/stlink-v2-1.cfg -f target/stm32f4x.cfg
