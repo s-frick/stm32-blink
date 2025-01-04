@@ -10,11 +10,14 @@ LDFLAGS=-T $(LINKER_FILE) \
 
 all: blink.elf
 
-blink.elf: main.o startup.o system_stm32f4xx.o
+blink.elf: main.o lights.o startup.o system_stm32f4xx.o
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $^ -o blink.elf
 
 main.o: main.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) main.c -c
+
+lights.o: lights.c
+	$(CC) $(CFLAGS) $(CPPFLAGS) lights.c -c
 
 startup.o: startup.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) startup.c -c
